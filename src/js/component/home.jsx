@@ -1,26 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+import '../../styles/index.css';
 
-//include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
 
-//create your first component
-const Home = () => {
+const Semaforo = () => {
+	const [brillar, setBrillar] = useState({ rojo: false, amarillo: false, verde: false });
+
+	const handleClick = (color) => {
+		setBrillar((prevState) => ({
+			rojo: color === "rojo" ? true : false,
+			amarillo: color === "amarillo" ? true : false,
+			verde: color === "verde" ? true : false,
+		}));
+	};
+
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
-		</div>
+		<>
+			<div className="tronco"></div>
+			<div className="semaforo">
+				<div
+					className={`luz rojo ${brillar.rojo ? "brillar" : ""}`}
+					onClick={() => handleClick("rojo")}
+				></div>
+				<div
+					className={`luz amarillo ${brillar.amarillo ? "brillar" : ""}`}
+					onClick={() => handleClick("amarillo")}
+				></div>
+				<div
+					className={`luz verde ${brillar.verde ? "brillar" : ""}`}
+					onClick={() => handleClick("verde")}
+				></div>
+
+			</div>
+		</>
 	);
 };
-
-export default Home;
+export default Semaforo;
